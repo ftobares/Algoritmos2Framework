@@ -1,6 +1,6 @@
 package framework.components;
 
-public class TextArea extends Field
+public class XTextArea extends XField
 {
 	private Integer xSize;
 	private Integer ySize;

@@ -1,6 +1,6 @@
 package framework.components;
 
-public class RadioButton extends Button
+public class XRadioButton extends XButton
 {
 	private Boolean isSelected;
 }

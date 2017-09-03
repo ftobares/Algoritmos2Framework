@@ -1,6 +1,6 @@
 package framework.components;
 
-public class Label extends Element
+public class XLabel extends XElement
 {
 	private Integer length;
 	private String title;

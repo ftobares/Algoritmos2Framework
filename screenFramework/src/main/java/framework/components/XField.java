@@ -1,6 +1,6 @@
 package framework.components;
 
-public abstract class Field extends Element
+public abstract class XField extends XElement
 {
 	protected Integer lenght;
 	protected String initValue;

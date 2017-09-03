@@ -2,19 +2,19 @@ package framework.components;
 
 import java.util.ArrayList;
 
-public class CompositeElement extends Element
+public class CompositeElement extends XElement
 {
-	private ArrayList<Element> hijos = new ArrayList<Element>();
+	private ArrayList<XElement> hijos = new ArrayList<XElement>();
 	
-	public void addElement(Element element){
+	public void addElement(XElement element){
 		
 	}
 	
-	public void deleteElement(Element element){
+	public void deleteElement(XElement element){
 		
 	}
 	
-	public Element getChildrenById(int elementId){
+	public XElement getChildrenById(int elementId){
 		return hijos.get(elementId);
 	}
 }

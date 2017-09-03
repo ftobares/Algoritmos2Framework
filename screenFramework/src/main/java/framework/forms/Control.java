@@ -7,5 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 public @interface Control
 {
 	String label();
-	String type();
+	Class type();
+	
 }

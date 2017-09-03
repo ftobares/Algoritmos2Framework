@@ -2,11 +2,11 @@ package framework.components;
 
 import framework.actions.Action;
 
-public abstract class Element
+public abstract class XElement
 {
 	protected String name;
 	protected Action action;
-	protected Element parent;
+	protected XElement parent;
 	
 	public void addActionHandler(){
 		

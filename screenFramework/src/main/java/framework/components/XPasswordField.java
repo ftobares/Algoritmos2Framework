@@ -1,6 +1,6 @@
 package framework.components;
 
-public class PasswordField extends Field
+public class XPasswordField extends XField
 {
 	private Boolean isPassword;
 

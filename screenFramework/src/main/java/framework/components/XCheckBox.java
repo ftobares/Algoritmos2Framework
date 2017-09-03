@@ -1,6 +1,6 @@
 package framework.components;
 
-public class CheckBox extends Button
+public class XCheckBox extends XButton
 {
 	private Boolean isChecked;
 }

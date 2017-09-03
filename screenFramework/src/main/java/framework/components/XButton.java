@@ -1,6 +1,6 @@
 package framework.components;
 
-public class Button extends Element
+public class XButton extends XElement
 {
 	private String title;
 
