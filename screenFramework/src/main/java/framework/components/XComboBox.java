@@ -1,6 +1,8 @@
 package framework.components;
 
-public class XComboBox extends XElement
+import javafx.scene.control.ComboBox;
+
+public class XComboBox extends ComboBox
 {
 
 }

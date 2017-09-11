@@ -1,6 +1,10 @@
 package framework.components;
 
-public class XTextField extends XField
+import javafx.scene.control.TextField;
+
+public class XTextField extends TextField
 {
-	private Integer xSize;
+	//TODO Usar super() para funcionalidad general
+	
+	//TODO Redefinir logica para cuestiones particulares
 }

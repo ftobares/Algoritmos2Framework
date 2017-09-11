@@ -1,6 +1,8 @@
 package framework.components;
 
-public class XCheckBox extends XButton
+import javafx.scene.control.CheckBox;
+
+public class XCheckBox extends CheckBox
 {
-	private Boolean isChecked;
+
 }

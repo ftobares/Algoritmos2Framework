@@ -1,6 +1,8 @@
 package framework.components;
 
-public class XRadioButton extends XButton
+import javafx.scene.control.RadioButton;
+
+public class XRadioButton extends RadioButton
 {
-	private Boolean isSelected;
+
 }

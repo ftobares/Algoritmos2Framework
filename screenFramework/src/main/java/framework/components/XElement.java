@@ -1,18 +1,8 @@
 package framework.components;
 
-import framework.actions.Action;
-
-public abstract class XElement
+public interface XElement
 {
-	protected String name;
-	protected Action action;
-	protected XElement parent;
+	public void addActionHandler();
 	
-	public void addActionHandler(){
-		
-	}
-	
-	public void fireAction(){
-		
-	}
+	public void fireAction();
 }

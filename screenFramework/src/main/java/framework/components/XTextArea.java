@@ -1,7 +1,8 @@
 package framework.components;
 
-public class XTextArea extends XField
+import javafx.scene.control.TextArea;
+
+public class XTextArea extends TextArea
 {
-	private Integer xSize;
-	private Integer ySize;
+
 }

@@ -1,7 +1,8 @@
 package framework.components;
 
-public class XLabel extends XElement
+import javafx.scene.control.Label;
+
+public class XLabel extends Label
 {
-	private Integer length;
-	private String title;
+
 }

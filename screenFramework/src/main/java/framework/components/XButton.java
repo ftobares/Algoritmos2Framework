@@ -1,16 +1,8 @@
 package framework.components;
 
-public class XButton extends XElement
+import javafx.scene.control.Button;
+
+public class XButton extends Button
 {
-	private String title;
 
-	public String getTitle()
-	{
-		return title;
-	}
-
-	public void setTitle(String title)
-	{
-		this.title=title;
-	}
 }

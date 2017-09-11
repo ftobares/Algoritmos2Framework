@@ -1,6 +1,8 @@
 package framework.components;
 
-public class XTable extends XElement
+import javafx.scene.control.TreeTableView;
+
+public class XTable extends TreeTableView
 {
 
 }

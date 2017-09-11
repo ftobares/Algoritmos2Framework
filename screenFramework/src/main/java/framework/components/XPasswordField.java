@@ -1,17 +1,8 @@
 package framework.components;
 
-public class XPasswordField extends XField
+import javafx.scene.control.PasswordField;
+
+public class XPasswordField extends PasswordField
 {
-	private Boolean isPassword;
-
-	public Boolean getIsPassword()
-	{
-		return isPassword;
-	}
-
-	public void setIsPassword(Boolean isPassword)
-	{
-		this.isPassword=isPassword;
-	}
 
 }
