@@ -11,5 +11,7 @@ public @interface Control
 {
 	String label();
 	Class tipoClase();
+	int xPosition();
+	int yPosition();
 	
 }

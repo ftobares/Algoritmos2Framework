@@ -2,13 +2,16 @@ package framework.application;
 
 import framework.components.XContainer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -16,69 +19,168 @@ import javafx.stage.Stage;
 
 public class ApplicationManager extends Application{
 	
-		Scene scene;
-		
-		public static void main(String[] args){
-			launch(args);
-		}
+	static Stage stage;
+	static XContainer container;
+	static Scene scene;
+	static GridPane grid;
+	static FlowPane flowTop;
+	static FlowPane flowBottom;
+	static FlowPane flowLeft;
+	static FlowPane flowRight;
+	String title;
+	
+	int windowXsize, windowYsize;
 
-		@Override
-		public void start(Stage primaryStage) throws Exception
-		{
-			GridPane grid=new GridPane();
-			grid.setPadding(new Insets(10,10,10,10));
-			grid.setMinSize(300,300);
-			grid.setVgap(5);
-			grid.setHgap(5);
-
-			Text username=new Text("Username:");
-			grid.add(username,0,0);
-
-			TextField text=new TextField();
-			text.setPrefColumnCount(10);
-			grid.add(text,1,0);
-
-			Text password=new Text("Password:");
-			grid.add(password,0,1);
-
-			TextField text2=new TextField();
-			text2.setPrefColumnCount(10);
-			grid.add(text2,1,1);
-			grid.setStyle("-fx-background-color: #D8BFD8;");
-			/*
-			 * */
-
-			Button btn=new Button();
-			btn.setText("Cambiar Root");
-			btn.setOnAction(new EventHandler<ActionEvent>()
+	public static void main(String[] args){
+		launch(args);
+	}
+	
+	public void setGridComponent(Node node,int x, int y){
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run()
 			{
-				@Override
-				public void handle(ActionEvent event)
-				{
-					StackPane root=new StackPane();
-					root.getChildren().add(btn);
-					Scene scene2=new Scene(root,300,250);
-					primaryStage.setScene(scene2);
-					primaryStage.show();
-				}
-			});		
-			
-			AnchorPane menuInferior = new AnchorPane();
-			menuInferior.setStyle("-fx-background-color: #A9A9A9;");		
-			menuInferior.getChildren().addAll(btn);
-			menuInferior.setMinSize(300, 100);
-			AnchorPane.setRightAnchor(btn, 10.0);		
-	//
-//			Scene scene=new Scene(grid,300,250);
+				grid.add(node,x,y);				
+			}			
+		});		
+	}
+	
+	public void setTopMenuComponent(Node node){
+		
+	}
+	
+	public void setBottomMenuComponent(Node node){
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run()
+			{
+				flowBottom.getChildren().addAll(node);				
+			}			
+		});				
+	}
+	
+	public void setLeftMenuComponent(Node node){
+		
+	}
+	
+	public void setRightMenuComponent(Node node){
+		
+	}	
 
-			XContainer container = new XContainer();
-			container.setCuerpoVentana(grid);
-			container.setMenuInferior(menuInferior);
-							
-			Scene scene= new Scene(container,400,400);
+	@Override
+	public void start(Stage primaryStage) throws Exception
+	{
+		stage = primaryStage;	
+		
+		/* Menu Superior */
+		flowTop = new FlowPane();
+		flowTop.setPadding(new Insets(10, 10, 10, 10));
+		flowTop.setStyle("-fx-background-color: DAE6F3;");
+		flowTop.setHgap(1);
+		flowTop.setMinSize(windowXsize-50, windowYsize/4);
+		
+		/* Menu Inferior */
+		flowBottom = new FlowPane();
+		flowBottom.setPadding(new Insets(10, 10, 10, 10));
+		flowBottom.setStyle("-fx-background-color: DAE6F3;");
+		flowBottom.setHgap(1);
+		flowBottom.setMinSize(windowXsize-50, windowYsize/4);
+		
+		/* Menu Izquierdo */
+		flowLeft = new FlowPane();
+		flowLeft.setPadding(new Insets(10, 10, 10, 10));
+		flowLeft.setStyle("-fx-background-color: DAE6F3;");
+		flowLeft.setHgap(1);
+		flowLeft.setMaxWidth(100);
+		
+		/* Menu Derecho */
+		flowRight = new FlowPane();
+		flowRight.setPadding(new Insets(10, 10, 10, 10));
+		flowRight.setStyle("-fx-background-color: DAE6F3;");
+		flowRight.setHgap(1);
+		flowRight.setMaxWidth(100);
+		
+		/* Panel central */
+		grid = new GridPane();
+		grid.setPadding(new Insets(10,10,10,10));
+		grid.setMinSize(windowXsize-50,windowYsize-50);
+		grid.setVgap(2);
+		grid.setHgap(2);
 			
-			primaryStage.setTitle("Hello World!");
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		}	
+		/* Defino contenedor y seto los paneles */
+		container = new XContainer();
+		container.setMenuDerecho(flowRight);
+		container.setMenuIzquierdo(flowLeft);
+		container.setMenuInferior(flowBottom);
+		container.setMenuSuperior(flowTop);
+		container.setCuerpoVentana(grid);
+		
+		/* Generlo la escena */
+		scene= new Scene(container,windowXsize,windowYsize);			
+		
+		primaryStage.setTitle(title);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+	
+	public XContainer getContainer()
+	{
+		return container;
+	}
+
+	public void setContainer(XContainer container)
+	{
+		ApplicationManager.container=container;
+	}
+
+	public Scene getScene()
+	{
+		return scene;
+	}
+
+	public void setScene(Scene scene)
+	{
+		ApplicationManager.scene=scene;
+	}
+
+	public GridPane getGrid()
+	{
+		return grid;
+	}
+
+	public void setGrid(GridPane grid)
+	{
+		ApplicationManager.grid=grid;
+	}
+
+	public String getTitle()
+	{
+		return title;
+	}
+
+	public void setTitle(String title)
+	{
+		this.title=title;		
+	}
+
+	public int getWindowXsize()
+	{
+		return windowXsize;
+	}
+
+	public void setWindowXsize(int windowXsize)
+	{
+		this.windowXsize=windowXsize;
+	}
+
+	public int getWindowYsize()
+	{
+		return windowYsize;
+	}
+
+	public void setWindowYsize(int windowYsize)
+	{
+		this.windowYsize=windowYsize;
+	}	
+		
 }

@@ -9,6 +9,10 @@ public class XContainer extends BorderPane
 	public XContainer(){		
 		super();
 	}
+	
+	public void setMenuSuperior(Node menu){
+		this.setTop(menu);
+	}
 
 	public void setCuerpoVentana(Node cuerpo){
 		this.setCenter(cuerpo);

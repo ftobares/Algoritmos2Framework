@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import framework.annotations.Control;
+import framework.annotations.Form;
+import framework.annotations.Submit;
 import framework.components.XContainer;
 import framework.components.XPasswordField;
 import framework.components.XTextField;
@@ -26,38 +28,84 @@ public class FrameworkApp
 {	
 	ApplicationManager app;
 	List<Object> listForms = new ArrayList<Object>();
-	XContainer contenedor;
-	Scene scene;
 	
 	public void init(){
 		app = new ApplicationManager();
 	}
 	
 	public void lunchApp(String[] args){
-		app.main(args);
+		Thread thread = new Thread(){
+			public void run(){
+				app.main(args);
+			}
+		};
+		thread.start();
 	}
 	
-	public <T> void addForm(T clazz){
-		Class form = clazz.getClass();
+	public void addForm(Class<?> clazz){
 		
-		final Field[] atributos = form.getDeclaredFields();
+		/**
+		 *  Proceso annotations de los atributos 
+		 *  */				
+		final Field[] atributos = clazz.getDeclaredFields();
 		
-		for(Field atributo : atributos){
-			Annotation annotationAtributo = atributo.getAnnotation(Control.class);			
-						
-			if(annotationAtributo != null && annotationAtributo instanceof XTextField){
-				//FIXME agregar logica
-			}else if(annotationAtributo != null && annotationAtributo instanceof XPasswordField){
-				//FIXME agregar logica
-			}
+		for(Field atributo : atributos){			
+			Annotation[] annotationArray = atributo.getAnnotations();
 			
-			listForms.add(form);
+			for(Annotation annotation : annotationArray){
+				
+				if(annotation != null && annotation instanceof Control){
+					Control control = ((Control)annotation);
+					System.out.println("Valores: "+control.label()+" | "+control.tipoClase().getName());
+					if(control.tipoClase().equals(XTextField.class)){
+						Text textField=new Text(control.label());					
+
+						TextField text=new TextField();
+						text.setPrefColumnCount(10);
+						
+						app.setGridComponent(textField,control.xPosition(),control.yPosition());
+						app.setGridComponent(text,control.xPosition()+1,control.yPosition());
+					}else if(control.tipoClase().equals(XPasswordField.class)){
+						Text textField=new Text(control.label());					
+
+						TextField text=new TextField();
+						text.setPrefColumnCount(10);
+						
+						app.setGridComponent(textField,control.xPosition(),control.yPosition());
+						app.setGridComponent(text,control.xPosition()+1,control.yPosition());					
+					}
+				}else if(annotation != null && annotation instanceof Submit){
+					System.out.println("Valores: "+((Submit)annotation).name());
+					Button boton = new Button();
+					boton.setText(((Submit)annotation).name());
+					boton.setOnAction(new EventHandler<ActionEvent>(){
+						@Override
+						public void handle(ActionEvent event)
+						{
+							System.out.println("Boton ejecutado!!");						
+						}					
+					});
+					app.setBottomMenuComponent(boton);
+				}				
+			}
 		}
+		
+		/**
+		 *  Proceso annotations de la Clase 
+		 *  */
+		final Annotation[] classAnnotations = clazz.getDeclaredAnnotations();
+		
+		for(Annotation classAnnotation : classAnnotations){
+			if(classAnnotation instanceof Form){
+				Form form = (Form)classAnnotation;
+				app.setTitle(form.title());				
+			}
+		}		
 	}
 
-	public void addFrame(double ancho, double alto)
+	public void addFrame(int ancho, int alto)
 	{
-		contenedor = new XContainer();
-		scene = new Scene(contenedor,ancho,alto);
+		app.setWindowXsize(ancho);
+		app.setWindowYsize(alto);
 	}
 }
