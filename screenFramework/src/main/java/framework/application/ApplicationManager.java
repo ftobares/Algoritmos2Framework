@@ -23,7 +23,8 @@ public class ApplicationManager extends Application{
 	static FlowPane flowLeft;
 	static FlowPane flowRight;
 	static String title;
-	
+	Boolean isInitialized;
+
 	int windowXsize, windowYsize;
 
 	public static void main(String[] args){
@@ -119,7 +120,7 @@ public class ApplicationManager extends Application{
 		container.setMenuSuperior(flowTop);
 		container.setCuerpoVentana(grid);
 		
-		/* Generlo la escena */
+		/* Genero la escena */
 		scene= new Scene(container,windowXsize,windowYsize);			
 		
 		primaryStage.setTitle(title);
@@ -185,6 +186,16 @@ public class ApplicationManager extends Application{
 	public void setWindowYsize(int windowYsize)
 	{
 		this.windowYsize=windowYsize;
+	}	
+	
+	public Boolean getIsInitialized()
+	{
+		return isInitialized;
+	}
+
+	public void setIsInitialized(Boolean isInitialized)
+	{
+		this.isInitialized=isInitialized;
 	}	
 		
 }

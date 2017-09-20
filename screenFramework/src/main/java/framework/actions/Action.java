@@ -1,11 +1,12 @@
 package framework.actions;
 
+import framework.application.FrameworkApp;
+import framework.forms.MostrarInformacion;
+import javafx.event.ActionEvent;
+
 public abstract class Action
 {
-	String name;
-	EventHandler handler;
+
+	public abstract void execute(FrameworkApp app, Class<?> clazz);
 	
-	public void execute(){
-		
-	}
 }

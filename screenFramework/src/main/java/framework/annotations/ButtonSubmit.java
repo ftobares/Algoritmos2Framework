@@ -4,8 +4,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Action
+public @interface ButtonSubmit
 {
-	String name() default "action";
-	String method();
+	String name();
+	String action();
 }

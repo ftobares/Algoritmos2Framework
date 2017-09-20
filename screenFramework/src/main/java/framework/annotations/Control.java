@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 public @interface Control
 {
 	String label();
-	Class tipoClase();
+	Class<?> tipoClase();
 	int xPosition();
 	int yPosition();
 	

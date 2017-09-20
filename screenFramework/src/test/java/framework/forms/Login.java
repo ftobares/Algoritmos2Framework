@@ -2,7 +2,7 @@ package framework.forms;
 
 import framework.annotations.Control;
 import framework.annotations.Form;
-import framework.annotations.Submit;
+import framework.annotations.ButtonSubmit;
 import framework.components.XPasswordField;
 import framework.components.XTextField;
 
@@ -15,11 +15,11 @@ public class Login
 	@Control(label="Password",tipoClase=XPasswordField.class,xPosition=0,yPosition=1)
 	String contrasenia;
 	
-	@Submit(name="Ingresar")
-	String ingresar;
-	
-	@Submit(name="Registrar")
-	String registrar;
+//	@ButtonSubmit(name="Ingresar")
+//	String ingresar;
+//	
+//	@ButtonSubmit(name="Registrar")
+//	String registrar;
 
 	public String getUsuario()
 	{
@@ -41,24 +41,24 @@ public class Login
 		this.contrasenia=contrasenia;
 	}
 
-	public String getIngresar()
-	{
-		return ingresar;
-	}
-
-	public void setIngresar(String ingresar)
-	{
-		this.ingresar=ingresar;
-	}
-
-	public String getRegistrar()
-	{
-		return registrar;
-	}
-
-	public void setRegistrar(String registrar)
-	{
-		this.registrar=registrar;
-	}
+//	public String getIngresar()
+//	{
+//		return ingresar;
+//	}
+//
+//	public void setIngresar(String ingresar)
+//	{
+//		this.ingresar=ingresar;
+//	}
+//
+//	public String getRegistrar()
+//	{
+//		return registrar;
+//	}
+//
+//	public void setRegistrar(String registrar)
+//	{
+//		this.registrar=registrar;
+//	}
 	
 }

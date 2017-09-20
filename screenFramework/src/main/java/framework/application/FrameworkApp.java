@@ -2,13 +2,16 @@ package framework.application;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 import framework.annotations.Control;
 import framework.annotations.Form;
-import framework.annotations.Submit;
+import framework.annotations.ButtonSubmit;
 import framework.components.XContainer;
+import framework.components.XLabel;
 import framework.components.XPasswordField;
 import framework.components.XTextField;
 import javafx.application.Application;
@@ -17,8 +20,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -27,10 +32,11 @@ import javafx.stage.Stage;
 public class FrameworkApp
 {	
 	ApplicationManager app;
-	List<Object> listForms = new ArrayList<Object>();
+	List<XContainer> listForms = new ArrayList<XContainer>();
 	
-	public void init(){
+	public void init(String title){
 		app = new ApplicationManager();
+		app.setTitle(title);
 	}
 	
 	public void lunchApp(String[] args){
@@ -42,7 +48,15 @@ public class FrameworkApp
 		thread.start();
 	}
 	
-	public void addForm(Class<?> clazz){
+	public void addForm(Class<?> clazz) throws NoSuchMethodException, SecurityException {		
+
+//		XContainer container = new XContainer();	
+//		GridPane grid = new GridPane();
+//		FlowPane flowTop = new FlowPane();
+//		FlowPane flowBottom = new FlowPane();
+//		FlowPane flowLeft = new FlowPane();
+//		FlowPane flowRight = new FlowPane();
+		
 		
 		/**
 		 *  Proceso annotations de los atributos 
@@ -73,16 +87,25 @@ public class FrameworkApp
 						
 						app.setGridComponent(textField,control.xPosition(),control.yPosition());
 						app.setGridComponent(text,control.xPosition()+1,control.yPosition());					
+					}else if(control.tipoClase().equals(XLabel.class)){
+						Label label = new Label(control.label());
+						label.setStyle("-fx-font: 18px Serif;");
+						app.setGridComponent(label,control.xPosition(),control.yPosition());
 					}
-				}else if(annotation != null && annotation instanceof Submit){
-					System.out.println("Valores: "+((Submit)annotation).name());
+				}else if(annotation != null && annotation instanceof ButtonSubmit){
+					System.out.println("Valores: "+((ButtonSubmit)annotation).name());
 					Button boton = new Button();
-					boton.setText(((Submit)annotation).name());
+					boton.setText(((ButtonSubmit)annotation).name());
+					
+					final Method buttonMethod = clazz.getMethod(((ButtonSubmit)annotation).action(),this.getClass());
+					
 					boton.setOnAction(new EventHandler<ActionEvent>(){
 						@Override
 						public void handle(ActionEvent event)
 						{
-							System.out.println("Boton ejecutado!!");						
+							System.out.println("Ejecuto boton "+((ButtonSubmit)annotation).name());
+							
+//							buttonMethod.invoke(clazz.newInstance(),new Object[]{ this });
 						}					
 					});
 					app.setBottomMenuComponent(boton);
@@ -100,16 +123,24 @@ public class FrameworkApp
 				Form form = (Form)classAnnotation;
 				app.setTitle(form.title());				
 			}
-		}		
+		}
+		
+		app.setIsInitialized(true);
+		
+//		listForms.add(container);
 	}
+	
+	
 
 	public void setFrameSize(int ancho, int alto)
 	{
 		app.setWindowXsize(ancho);
 		app.setWindowYsize(alto);
+		
 	}
 	
-	public void setTitle(String title){
+	public void changeTitle(String title){
 		app.setTitle(title);
+		
 	}
 }

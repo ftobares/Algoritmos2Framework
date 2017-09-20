@@ -1,9 +1,12 @@
 package framework.forms;
 
-import framework.annotations.Action;
+import framework.actions.Action;
+import framework.actions.NavigateAction;
+import framework.actions.SaveAction;
 import framework.annotations.Control;
 import framework.annotations.Form;
-import framework.annotations.Submit;
+import framework.application.FrameworkApp;
+import framework.annotations.ButtonSubmit;
 import framework.components.XPasswordField;
 import framework.components.XTextField;
 
@@ -19,21 +22,21 @@ public class Registro
 	@Control(label="Email",tipoClase=XTextField.class,xPosition=0,yPosition=2)
 	String mail;
 	
-	@Submit(name="Crear Cuenta")
-	@Action(name="registro",method="crearCuenta")
+	@ButtonSubmit(name="Crear Cuenta",action="crearCuenta")	
 	String crearCuenta;
 	
-	@Submit(name="Iniciar Sesion")
-	@Action(name="inicio",method="iniciarSesion")
-	String iniciarSesion;	
+	@ButtonSubmit(name="Iniciar Sesion",action="iniciarSesion")	
+	String iniciarSesion;
 	
-	public void crearCuenta(){
-		
+	public void crearCuenta(FrameworkApp app){
+		System.out.println("Se ejecuta el metodo crearCuenta");
+		Action registro = new SaveAction();
+		registro.execute(app,MostrarInformacion.class);
 	}
 	
-	public void iniciarSesion(){
+	public void iniciarSesion(FrameworkApp app){
 		
-	}	
+	}
 
 	public String getUsuario()
 	{
