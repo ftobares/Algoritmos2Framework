@@ -1,20 +1,15 @@
 package framework.application;
 
 import framework.components.XContainer;
+import framework.components.XLabel;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ApplicationManager extends Application{
@@ -27,7 +22,7 @@ public class ApplicationManager extends Application{
 	static FlowPane flowBottom;
 	static FlowPane flowLeft;
 	static FlowPane flowRight;
-	String title;
+	static String title;
 	
 	int windowXsize, windowYsize;
 
@@ -78,6 +73,11 @@ public class ApplicationManager extends Application{
 		flowTop.setStyle("-fx-background-color: DAE6F3;");
 		flowTop.setHgap(1);
 		flowTop.setMinSize(windowXsize-50, windowYsize/4);
+		flowTop.setAlignment(Pos.TOP_CENTER);
+		
+		XLabel label = new XLabel(title);
+		label.setStyle("-fx-font: 24px Serif;");
+		flowTop.getChildren().addAll(label);
 		
 		/* Menu Inferior */
 		flowBottom = new FlowPane();
@@ -85,6 +85,7 @@ public class ApplicationManager extends Application{
 		flowBottom.setStyle("-fx-background-color: DAE6F3;");
 		flowBottom.setHgap(1);
 		flowBottom.setMinSize(windowXsize-50, windowYsize/4);
+		flowBottom.setAlignment(Pos.BOTTOM_CENTER);
 		
 		/* Menu Izquierdo */
 		flowLeft = new FlowPane();
@@ -92,6 +93,7 @@ public class ApplicationManager extends Application{
 		flowLeft.setStyle("-fx-background-color: DAE6F3;");
 		flowLeft.setHgap(1);
 		flowLeft.setMaxWidth(100);
+		flowLeft.setAlignment(Pos.TOP_LEFT);
 		
 		/* Menu Derecho */
 		flowRight = new FlowPane();
@@ -99,6 +101,7 @@ public class ApplicationManager extends Application{
 		flowRight.setStyle("-fx-background-color: DAE6F3;");
 		flowRight.setHgap(1);
 		flowRight.setMaxWidth(100);
+		flowRight.setAlignment(Pos.TOP_RIGHT);
 		
 		/* Panel central */
 		grid = new GridPane();
@@ -106,6 +109,7 @@ public class ApplicationManager extends Application{
 		grid.setMinSize(windowXsize-50,windowYsize-50);
 		grid.setVgap(2);
 		grid.setHgap(2);
+		grid.setAlignment(Pos.TOP_CENTER);
 			
 		/* Defino contenedor y seto los paneles */
 		container = new XContainer();

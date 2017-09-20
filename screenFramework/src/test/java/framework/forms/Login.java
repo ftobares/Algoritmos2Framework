@@ -20,4 +20,45 @@ public class Login
 	
 	@Submit(name="Registrar")
 	String registrar;
+
+	public String getUsuario()
+	{
+		return usuario;
+	}
+
+	public void setUsuario(String usuario)
+	{
+		this.usuario=usuario;
+	}
+
+	public String getContrasenia()
+	{
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia)
+	{
+		this.contrasenia=contrasenia;
+	}
+
+	public String getIngresar()
+	{
+		return ingresar;
+	}
+
+	public void setIngresar(String ingresar)
+	{
+		this.ingresar=ingresar;
+	}
+
+	public String getRegistrar()
+	{
+		return registrar;
+	}
+
+	public void setRegistrar(String registrar)
+	{
+		this.registrar=registrar;
+	}
+	
 }

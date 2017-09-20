@@ -23,7 +23,55 @@ public class Registro
 	@Action(name="registro",method="crearCuenta")
 	String crearCuenta;
 	
+	@Submit(name="Iniciar Sesion")
+	@Action(name="inicio",method="iniciarSesion")
+	String iniciarSesion;	
+	
 	public void crearCuenta(){
 		
 	}
+	
+	public void iniciarSesion(){
+		
+	}	
+
+	public String getUsuario()
+	{
+		return usuario;
+	}
+
+	public void setUsuario(String usuario)
+	{
+		this.usuario=usuario;
+	}
+
+	public String getContrasenia()
+	{
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia)
+	{
+		this.contrasenia=contrasenia;
+	}
+
+	public String getMail()
+	{
+		return mail;
+	}
+
+	public void setMail(String mail)
+	{
+		this.mail=mail;
+	}
+
+	public String getCrearCuenta()
+	{
+		return crearCuenta;
+	}
+
+	public void setCrearCuenta(String crearCuenta)
+	{
+		this.crearCuenta=crearCuenta;
+	}	
 }

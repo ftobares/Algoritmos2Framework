@@ -6,9 +6,10 @@ public class AppTest
 {
 	public static void main(String[] args)	{
 		FrameworkApp app = new FrameworkApp();
-		app.init();	
+		app.init();
+		app.setTitle("Formularios");
 		app.lunchApp(args);
-		app.addFrame(400,400);
+		app.setFrameSize(400,400);
 		app.addForm(Registro.class);
 	}
 }

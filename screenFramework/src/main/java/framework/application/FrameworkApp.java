@@ -103,9 +103,13 @@ public class FrameworkApp
 		}		
 	}
 
-	public void addFrame(int ancho, int alto)
+	public void setFrameSize(int ancho, int alto)
 	{
 		app.setWindowXsize(ancho);
 		app.setWindowYsize(alto);
+	}
+	
+	public void setTitle(String title){
+		app.setTitle(title);
 	}
 }
